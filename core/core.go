@@ -9,12 +9,11 @@ import (
 	"github.com/vouv/srun/resp"
 	"github.com/vouv/srun/utils"
 	"net/url"
-	"strconv"
 	"strings"
 )
 
 const (
-	baseAddr = "https://portal.nwafu.edu.cn"
+    baseAddr = "https://portal.nwafu.edu.cn"
 
 	challengeUrl = "/cgi-bin/get_challenge"
 	portalUrl    = "/cgi-bin/srun_portal"
@@ -23,19 +22,19 @@ const (
 )
 
 // 获取acid等
-func Prepare() (int, error) {
-	first, err := get(baseAddr)
-	if err != nil {
-		return 1, err
-	}
-	second, err := get(first.Header.Get("Location"))
-	if err != nil {
-		return 1, err
-	}
-	target := second.Header.Get("location")
-	query, _ := url.Parse(baseAddr + target)
-	return strconv.Atoi(query.Query().Get("ac_id"))
-}
+// func Prepare() (int, error) {
+// 	first, err := get(baseAddr)
+// 	if err != nil {
+// 		return 1, err
+// 	}
+// 	second, err := get(first.Header.Get("Location"))
+// 	if err != nil {
+// 		return 1, err
+// 	}
+// 	target := second.Header.Get("location")
+// 	query, _ := url.Parse(baseAddr + target)
+// 	return strconv.Atoi(query.Query().Get("ac_id"))
+// }
 
 // api Login
 // step 1: prepare & get acid
@@ -45,7 +44,7 @@ func Login(account *model.Account) (err error) {
 	log.Debug("Username: ", account.Username)
 
 	// 先获取acid
-	acid, err := Prepare()
+	acid, err := 1, nil
 	if err != nil {
 		log.Debug("prepare error:", err)
 		return
