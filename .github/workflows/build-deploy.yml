@@ -21,6 +21,7 @@ jobs:
       - run: CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o bin/srun-mac ./cmd/srun
       - run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/srun-linux ./cmd/srun
       - run: CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o bin/srun.exe ./cmd/srun
+      - run: CGO_ENABLED=0 GOOS=linux GOARCH=mipsle go build -o bin/srun-mipsle ./cmd/srun
 
       - name: Create Release
         id: create_release
@@ -65,3 +66,18 @@ jobs:
           asset_path: ./bin/srun.exe
           asset_name: srun.exe
           asset_content_type: application/octet-stream
+          
+      - name: Upload Release MIPSLE
+        id: upload-release-mipsle
+        uses: actions/upload-release-asset@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./bin/srun-mipsle
+          asset_name: srun-mipsle
+          asset_content_type: application/octet-stream
+          
+        
+        
+        
