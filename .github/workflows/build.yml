@@ -32,3 +32,4 @@ jobs:
       - run: CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o bin/srun-mac ./cmd/srun
       - run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/srun-linux ./cmd/srun
       - run: CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o bin/srun.exe ./cmd/srun
+      - run: CGO_ENABLED=0 GOOS=linux GOARCH=mipsle go build -o bin/srun-mipsle ./cmd/srun
