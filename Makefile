@@ -7,6 +7,7 @@ publish:
 	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o bin/srun-mac ./cmd/srun
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/srun-linux ./cmd/srun
 	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o bin/srun.exe ./cmd/srun
+	CGO_ENABLED=0 GOOS=linux GOARCH=mipsle go build -o bin/srun ./cmd/srun
 
 darwin:
 	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o bin/srun ./cmd/srun
@@ -17,6 +18,9 @@ linux:
 windows:
 	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o bin/srun.exe ./cmd/srun
 
+mips:
+	CGO_ENABLED=0 GOOS=linux GOARCH=mipsle go build -o bin/srun ./cmd/srun
+
 clean:
 	rm -rf ./bin
 
@@ -24,4 +28,5 @@ clean:
 .PHONY:darwin
 .PHONY:linux
 .PHONY:windows
+.PHONY:mips
 .PHONY:clean
